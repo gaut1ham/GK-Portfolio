@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gautham Krishna B | Cybersecurity Engineer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Variables & Reset */
+        :root {
+            --primary: #0a192f;
+            --secondary: #112240;
+            --accent: #64ffda;
+            --light-accent: #a8ffec;
+            --text-primary: #e6f1ff;
+            --text-secondary: #8892b0;
+            --text-light: #ccd6f6;
+            --card-bg: rgba(17, 34, 64, 0.7);
+            --border-color: #233554;
+            --shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+            --transition: all 0.3s ease;
+            --border-radius: 12px;
+            --font-mono: 'SF Mono', 'Fira Code', 'Monaco', monospace;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            padding: 100px 0;
+        }
+        
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.1;
+        }
+        
+        h1 {
+            font-size: clamp(3rem, 5vw, 4.5rem);
+        }
+        
+        h2 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            border-radius: 2px;
+        }
+        
+        .section-title-center {
+            text-align: center;
+        }
+        
+        .section-title-center:after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+        
+        .highlight {
+            color: var(--accent);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            border-radius: var(--border-radius);
+            padding: 1rem 2rem;
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(100, 255, 218, 0.1), transparent);
+            transition: left 0.7s ease;
+            z-index: -1;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+        
+        .btn:hover:before {
+            left: 100%;
+        }
+        
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(35, 53, 84, 0.3);
+            transition: var(--transition);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo span {
+            color: var(--text-primary);
+        }
+        
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+        
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        
+        .mobile-menu-btn:hover {
+            background: rgba(100, 255, 218, 0.1);
+        }
+        
+        /* Hero Section */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .hero-text {
+            max-width: 700px;
+        }
+        
+        .hero-intro {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .hero-intro:before {
+            content: '>';
+            color: var(--accent);
+        }
+        
+        .hero-title {
+            margin-bottom: 1.5rem;
+            line-height: 1.05;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.8rem, 3vw, 3rem);
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+        
+        .hero-description {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-bottom: 3rem;
+            padding-left: 20px;
+            border-left: 2px solid var(--accent);
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn-secondary {
+            background: rgba(100, 255, 218, 0.1);
+            border-color: transparent;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(100, 255, 218, 0.2);
+        }
+        
+        .hero-image {
+            position: relative;
+            width: 350px;
+            height: 350px;
+            margin: 0 auto;
+        }
+        
+        .image-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--secondary);
+            border: 4px solid var(--accent);
+            box-shadow: 
+                0 0 30px rgba(100, 255, 218, 0.3),
+                var(--shadow);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .image-circle:before {
+            content: '';
+            position: absolute;
+            width: 120%;
+            height: 120%;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, transparent, var(--accent), transparent);
+            animation: rotate 10s linear infinite;
+            filter: blur(20px);
+            opacity: 0.3;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .profile-img {
+            width: 95%;
+            height: 95%;
+            border-radius: 50%;
+            object-fit: cover;
+            position: relative;
+            z-index: 2;
+            border: 2px solid var(--secondary);
+        }
+        
+        /* Skills Section */
+        #skills {
+            background: var(--secondary);
+            position: relative;
+        }
+        
+        #skills:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="20" fill="none"/><path d="M0 0L20 20M20 0L0 20" stroke="rgba(100,255,218,0.05)" stroke-width="0.5"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .skill-category {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+            border-color: var(--accent);
+        }
+        
+        .skill-category h3 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            font-size: 1.4rem;
+        }
+        
+        .skill-category h3 i {
+            margin-right: 12px;
+            font-size: 1.3rem;
+        }
+        
+        .skill-list {
+            list-style: none;
+        }
+        
+        .skill-list li {
+            margin-bottom: 1rem;
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(35, 53, 84, 0.3);
+        }
+        
+        .skill-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .skill-list li:before {
+            content: '▹';
+            color: var(--accent);
+            margin-right: 12px;
+            font-size: 1.1rem;
+        }
+        
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .project-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(10px);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+            border-color: var(--accent);
+        }
+        
+        .project-header {
+            padding: 2rem 2rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        
+        .project-icon {
+            color: var(--accent);
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .project-links a {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(100, 255, 218, 0.05);
+        }
+        
+        .project-links a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+            background: rgba(100, 255, 218, 0.1);
+        }
+        
+        .project-content {
+            padding: 0 2rem 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-tech {
+            margin: 1.5rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        
+        .tech-tag {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--accent);
+            background: rgba(100, 255, 218, 0.1);
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+        }
+        
+        .project-learnings {
+            margin-top: auto;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .project-learnings strong {
+            color: var(--accent);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+        }
+        
+        /* Philosophy Section */
+        #philosophy {
+            background: var(--secondary);
+            position: relative;
+        }
+        
+        #philosophy:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="30" r="1" fill="rgba(100,255,218,0.05)" /></svg>');
+            opacity: 0.3;
+        }
+        
+        .philosophy-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .philosophy-quote {
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--accent);
+            margin: 2.5rem 0;
+            padding: 2rem;
+            position: relative;
+            background: rgba(100, 255, 218, 0.05);
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--accent);
+        }
+        
+        .philosophy-quote:before {
+            content: '"';
+            font-size: 4rem;
+            color: rgba(100, 255, 218, 0.3);
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-family: serif;
+        }
+        
+        .philosophy-quote:after {
+            content: '"';
+            font-size: 4rem;
+            color: rgba(100, 255, 218, 0.3);
+            position: absolute;
+            bottom: -40px;
+            right: 20px;
+            font-family: serif;
+        }
+        
+        /* Knowledge Section */
+        #knowledge {
+            padding: 80px 0;
+        }
+        
+        .knowledge-container {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+        }
+        
+        .knowledge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .knowledge-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 2rem 1.5rem;
+            border-radius: var(--border-radius);
+            background: rgba(10, 25, 47, 0.5);
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+        
+        .knowledge-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+            border-color: var(--accent);
+        }
+        
+        .knowledge-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(100, 255, 218, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            color: var(--accent);
+            border: 2px solid rgba(100, 255, 218, 0.2);
+            transition: var(--transition);
+        }
+        
+        .knowledge-item:hover .knowledge-icon {
+            transform: scale(1.1);
+            background: rgba(100, 255, 218, 0.2);
+        }
+        
+        .knowledge-item h4 {
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+        }
+        
+        .knowledge-item p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+        
+        /* Contact Section */
+        #contact {
+            text-align: center;
+            background: var(--secondary);
+            position: relative;
+        }
+        
+        #contact:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M0 50L50 0L100 50L50 100Z" fill="rgba(100,255,218,0.03)" /></svg>');
+            opacity: 0.3;
+        }
+        
+        .contact-description {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 3rem;
+            margin-top: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: var(--transition);
+            width: 120px;
+            text-decoration: none;
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-8px);
+        }
+        
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(100, 255, 218, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            color: var(--accent);
+            border: 2px solid rgba(100, 255, 218, 0.2);
+            transition: var(--transition);
+        }
+        
+        .contact-item:hover .contact-icon {
+            background: rgba(100, 255, 218, 0.2);
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(100, 255, 218, 0.3);
+        }
+        
+        .contact-text {
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-light);
+        }
+        
+        .contact-item:hover .contact-text {
+            color: var(--accent);
+        }
+        
+        .contact-handle {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2.5rem 0;
+            border-top: 1px solid var(--border-color);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            background: var(--primary);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
+            }
+            
+            .hero-image {
+                order: -1;
+            }
+            
+            .hero-text {
+                max-width: 100%;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            h2:after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            section {
+                padding: 80px 0;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: var(--secondary);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem;
+                gap: 1.5rem;
+                box-shadow: var(--shadow);
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.4s ease;
+                border-top: 1px solid var(--border-color);
+                backdrop-filter: blur(10px);
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-image {
+                width: 280px;
+                height: 280px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .knowledge-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .contact-links {
+                gap: 2rem;
+            }
+            
+            .hero-description {
+                padding-left: 0;
+                border-left: none;
+                border-top: 2px solid var(--accent);
+                border-bottom: 2px solid var(--accent);
+                padding: 1rem 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-image {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .knowledge-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 2rem;
+            }
+            
+            .contact-item {
+                width: 100%;
+                max-width: 200px;
+            }
+            
+            .skill-category, .knowledge-container {
+                padding: 2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+        
+        /* Animation on scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container nav-container">
+            <a href="#hero" class="logo">
+                <div class="logo-icon">GK</div>
+                <span>Gautham Krishna</span>
+            </a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#philosophy">Philosophy</a></li>
+                <li><a href="#knowledge">Knowledge</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <p class="hero-intro">Hello, I'm</p>
+                <h1 class="hero-title">Gautham Krishna B</h1>
+                <h2 class="hero-subtitle">Cybersecurity Engineer & Developer</h2>
+                <p class="hero-description">
+                    Building secure systems through defensive programming and practical security tooling. 
+                    Specializing in Python security automation, C++ systems programming, and offensive security testing 
+                    to develop robust, resilient applications and infrastructure.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn">
+                        <i class="fas fa-code"></i> View Projects
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <i class="fas fa-envelope"></i> Get In Touch
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="image-circle">
+                    <img src="image1.jpg" alt="Gautham Krishna B" class="profile-img" onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title-center">Technical Expertise</h2>
+            <div class="skills-container">
+                <div class="skill-category fade-in">
+                    <h3><i class="fas fa-code"></i> Programming & Scripting</h3>
+                    <ul class="skill-list">
+                        <li>Python (Security Automation & Penetration Testing)</li>
+                        <li>C++ (Systems Programming, Embedded & Robotics)</li>
+                        <li>Go (Backend Systems & Security Tools)</li>
+                        <li>JavaScript/HTML/CSS (Web Security & Frontend)</li>
+                        <li>Bash/Shell Scripting (Linux Automation)</li>
+                    </ul>
+                </div>
+                <div class="skill-category fade-in">
+                    <h3><i class="fas fa-shield-alt"></i> Cybersecurity Domains</h3>
+                    <ul class="skill-list">
+                        <li>Secure Authentication & Authorization Systems</li>
+                        <li>Penetration Testing & Vulnerability Assessment</li>
+                        <li>Defensive Security & Incident Response</li>
+                        <li>Cryptography & Secure Communications</li>
+                        <li>Network Security & Protocol Analysis</li>
+                    </ul>
+                </div>
+                <div class="skill-category fade-in">
+                    <h3><i class="fas fa-tools"></i> Tools & Platforms</h3>
+                    <ul class="skill-list">
+                        <li>Git & Advanced GitHub Workflows</li>
+                        <li>Linux/Unix System Administration & Security</li>
+                        <li>Docker & Container Security Best Practices</li>
+                        <li>Security Testing Tools (Burp, Nmap, Metasploit)</li>
+                        <li>CI/CD Security Integration & Automation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2>Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/gaut1ham/python-security-scripts" target="_blank" title="View on GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Python Security Scripts</h3>
+                        <p>
+                            Comprehensive collection of Python scripts for security testing including brute-force simulation, 
+                            hash cracking, authentication bypass testing, cryptographic implementations, and secure coding examples.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python 3</span>
+                            <span class="tech-tag">Security</span>
+                            <span class="tech-tag">Cryptography</span>
+                            <span class="tech-tag">Automation</span>
+                            <span class="tech-tag">Testing</span>
+                        </div>
+                        <div class="project-learnings">
+                            <strong>Key Learnings:</strong> Secure authentication implementation, cryptographic hash functions, attack simulation methodologies.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i class="fas fa-shield-virus"></i>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/gaut1ham/defensive-security" target="_blank" title="View on GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Defensive Security Framework</h3>
+                        <p>
+                            Framework for building defensive security tools including intrusion detection, 
+                            security monitoring scripts, log analysis, and system hardening automation with focus on proactive security.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Go</span>
+                            <span class="tech-tag">Security</span>
+                            <span class="tech-tag">Monitoring</span>
+                            <span class="tech-tag">Automation</span>
+                        </div>
+                        <div class="project-learnings">
+                            <strong>Key Learnings:</strong> Defensive programming patterns, security monitoring architecture, system hardening techniques.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/gaut1ham/arduino-robotics-power-kit" target="_blank" title="View on GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Arduino Robotics Power Kit</h3>
+                        <p>
+                            Embedded systems project using C++ for robotics applications including motor control, 
+                            sensor integration, and low-level hardware interaction with security considerations for IoT devices.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">C++</span>
+                            <span class="tech-tag">Arduino</span>
+                            <span class="tech-tag">Embedded</span>
+                            <span class="tech-tag">IoT</span>
+                            <span class="tech-tag">Robotics</span>
+                        </div>
+                        <div class="project-learnings">
+                            <strong>Key Learnings:</strong> Embedded systems security, hardware-software integration, IoT device hardening, real-time systems.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section id="philosophy">
+        <div class="container">
+            <h2 class="section-title-center">Security Philosophy</h2>
+            <div class="philosophy-content fade-in">
+                <p>
+                    True security understanding comes from exploring systems from multiple perspectives. 
+                    By combining offensive security testing with defensive engineering principles, 
+                    I develop comprehensive security solutions that stand up to real-world threats.
+                </p>
+                <p class="philosophy-quote">
+                    Understanding systems by pushing their limits — breaking things to secure them better
+                </p>
+                <p>
+                    This hands-on, practical approach informs every aspect of my work—from secure code development 
+                    and system architecture to penetration testing and security tool creation. I believe security 
+                    should be integrated throughout the development lifecycle, not added as an afterthought.
+                </p>
+                <p>
+                    My methodology emphasizes continuous learning, practical experimentation, and the application 
+                    of security fundamentals to build resilient systems that protect against evolving threats.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Knowledge Section -->
+    <section id="knowledge">
+        <div class="container">
+            <h2 class="section-title-center">Technologies & Domains</h2>
+            <div class="knowledge-container fade-in">
+                <div class="knowledge-grid">
+                    <div class="knowledge-item">
+                        <div class="knowledge-icon">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <h4>Python Security</h4>
+                        <p>Security automation, pen testing tools, crypto implementations, and defensive scripting.</p>
+                    </div>
+                    
+                    <div class="knowledge-item">
+                        <div class="knowledge-icon">
+                            <i class="fas fa-microchip"></i>
+                        </div>
+                        <h4>Systems Programming</h4>
+                        <p>C++ for embedded systems, low-level programming, robotics, and performance applications.</p>
+                    </div>
+                    
+                    <div class="knowledge-item">
+                        <div class="knowledge-icon">
+                            <i class="fab fa-linux"></i>
+                        </div>
+                        <h4>Linux Security</h4>
+                        <p>System hardening, kernel security, privilege management, and secure Linux configuration.</p>
+                    </div>
+                    
+                    <div class="knowledge-item">
+                        <div class="knowledge-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <h4>Network Security</h4>
+                        <p>Protocol analysis, secure communications, firewall config, and network monitoring.</p>
+                    </div>
+                    
+                    <div class="knowledge-item">
+                        <div class="knowledge-icon">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <h4>Auth Systems</h4>
+                        <p>Secure auth implementation, session management, OAuth, JWT, and MFA systems.</p>
+                    </div>
+                    
+                    <div class="knowledge-item">
+                        <div class="knowledge-icon">
+                            <i class="fas fa-code-branch"></i>
+                        </div>
+                        <h4>Secure DevOps</h4>
+                        <p>CI/CD security integration, container security, and infrastructure as code security.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title-center">Get In Touch</h2>
+            <p class="contact-description">
+                Interested in discussing cybersecurity, secure coding practices, or collaborative projects? 
+                I'm always open to conversations about security technology, tool development, and innovative solutions.
+            </p>
+            <a href="mailto:gkb8097@gmail.com" class="btn">
+                <i class="fas fa-paper-plane"></i> Send Message
+            </a>
+            
+            <div class="contact-links">
+                <a href="mailto:gkb8097@gmail.com" class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <span class="contact-text">Email</span>
+                    <span class="contact-handle">gkb8097@gmail.com</span>
+                </a>
+                
+                <a href="https://github.com/gaut1ham" target="_blank" class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <span class="contact-text">GitHub</span>
+                    <span class="contact-handle">@gaut1ham</span>
+                </a>
+                
+                <a href="https://instagram.com/gaut1ham" target="_blank" class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <span class="contact-text">Instagram</span>
+                    <span class="contact-handle">@gaut1ham</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© <span id="currentYear"></span> Gautham Krishna B. All rights reserved.</p>
+            <p>Cybersecurity Engineer | Secure Software Developer | Systems Programmer</p>
+            <div class="footer-links">
+                <a href="https://github.com/gaut1ham" target="_blank">GitHub</a>
+                <a href="https://instagram.com/gaut1ham" target="_blank">Instagram</a>
+                <a href="mailto:gkb8097@gmail.com">Email</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Scroll animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInOnScroll = () => {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if(elementTop < windowHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+        
+        // Initial check
+        fadeInOnScroll();
+        
+        // Check on scroll
+        window.addEventListener('scroll', fadeInOnScroll);
+        
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 5px 20px rgba(2, 12, 27, 0.7)';
+                header.style.borderBottom = '1px solid rgba(35, 53, 84, 0.5)';
+            } else {
+                header.style.boxShadow = 'none';
+                header.style.borderBottom = '1px solid rgba(35, 53, 84, 0.3)';
+            }
+        });
+        
+        // Set current year in footer
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentYear = new Date().getFullYear();
+            document.getElementById('currentYear').textContent = currentYear;
+            
+            // Add hover effect to buttons
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+        
+        // Add active nav link based on scroll position
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.nav-links a');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if(scrollY >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if(item.getAttribute('href').substring(1) === current) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
